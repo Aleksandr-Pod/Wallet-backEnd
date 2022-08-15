@@ -15,12 +15,12 @@ const getStatistics = async (req, res) => {
     {
       $group: {
         _id: {
-          categoryId: "$categoryId",
+          // categoryId: "$categoryId",
           category: "$category",
           isIncome: "$isIncome",
-          colorCategory: "$colorCategory",
+          colorCategory: "$colorCategory", // я бы вынес на фронтенд
         },
-
+        // colorCategory: "$colorCategory",
         totalSum: { $sum: "$amount" },
       },
     },

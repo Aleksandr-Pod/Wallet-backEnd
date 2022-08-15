@@ -16,6 +16,7 @@ const add = async (req, res) => {
     const res =  categories.expense.find(el => el.name === category);
     return res?.backgroundColor || null;
     }
+    // let color;
     // categories.expense.map((el) => {
     //   if (el.name === categoryName) {
     //     color = el.backgroundColor;
