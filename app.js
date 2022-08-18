@@ -3,7 +3,7 @@ const cors = require("cors");
 // const swaggerUi = require("swagger-ui-express");
 // const swaggerDocument = require("./swagger.json");
 const path = require("path");
-require("dotenv").config({ path: path.join(__dirname, "./.env") });
+require("dotenv").config();
 
 const usersRouter = require("./routes/api/users");
 const transactionsRouter = require("./routes/api/transactions");
