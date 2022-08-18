@@ -15,7 +15,6 @@ const getStatistics = async (req, res) => {
     {
       $group: {
         _id: {
-          // categoryId: "$categoryId",
           category: "$category",
           isIncome: "$isIncome",
           colorCategory: "$colorCategory", // я бы вынес на фронтенд
@@ -36,6 +35,10 @@ const getStatistics = async (req, res) => {
     (acc, { totalSum }) => acc + totalSum,
     0
   );
+  const myResult = transactionsExpense.map(el => ({
+    category: el._id.category,
+    catColor: el._id.colorCategory,
+    totalSum: el.totalSum}))
 
   res.status(200).json({
     status: "success",
@@ -44,7 +47,7 @@ const getStatistics = async (req, res) => {
     data: {
       month,
       year,
-      result: transactionsExpense,
+      result: myResult,
       totalIncome,
       totalExpense,
     },
