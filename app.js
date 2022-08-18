@@ -2,8 +2,7 @@ const express = require("express");
 const cors = require("cors");
 // const swaggerUi = require("swagger-ui-express");
 // const swaggerDocument = require("./swagger.json");
-const path = require("path");
-require("dotenv").config();
+
 
 const usersRouter = require("./routes/api/users");
 const transactionsRouter = require("./routes/api/transactions");
@@ -19,12 +18,12 @@ app.use("/api/users", usersRouter);
 app.use("/api/transactions", transactionsRouter);
 app.use("/api/statistics", statisticsRouter);
 
-app.use("/link", (req, res) => {
-  res.sendFile(path.join(__dirname, "./public/link.html"));
-});
-app.use("/succes", (req, res) => {
-  res.sendFile(path.join(__dirname, "./public/succes.html"));
-});
+// app.use("/link", (req, res) => {
+//   res.sendFile(path.join(__dirname, "./public/link.html"));
+// });
+// app.use("/succes", (req, res) => {
+//   res.sendFile(path.join(__dirname, "./public/succes.html"));
+// });
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
