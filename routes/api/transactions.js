@@ -6,11 +6,8 @@ const { auth } = require("../../middlewares");
 
 const router = express.Router();
 
-// нова транзакція
 router.post("/", auth, validation(joiSchema), ctrlWrapper(ctrl.add));
-// останні транзакції
 router.get("/", auth, ctrlWrapper(ctrl.getAll));
-// отримання категорій
-router.get("/categories", ctrlWrapper(ctrl.getCategories));
+router.delete("/", auth, ctrlWrapper(ctrl.remove));
 
 module.exports = router;
