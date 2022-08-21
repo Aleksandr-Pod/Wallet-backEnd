@@ -10,7 +10,7 @@ const remove = async (req, res) => {
     _id: transactionId
   }
 // getting data from deleting transaction
-const transactionData = await Transaction.findById(transactionId);
+const {isIncome, amount} = await Transaction.findById(transactionId);
 
 const result = await Transaction.findOneAndRemove(data);
 if (!result) {
@@ -20,9 +20,9 @@ if (!result) {
 }
   
   // calc userBallance
-  const userBalance = balance - transactionData.amount;
+  const newUserBalance = isIncome ? balance - amount : balance + amount;
   // update userBallance
-  await User.findByIdAndUpdate(_id, { balance: userBalance.toFixed(2) });
+  await User.findByIdAndUpdate(_id, { balance: newUserBalance.toFixed(2) });
   
   res.status(204).json({
     status: "success",
