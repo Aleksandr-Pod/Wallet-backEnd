@@ -26,21 +26,17 @@ const login = async (req, res) => {
 
   await User.findByIdAndUpdate(_id, { token });
 
-  const lastTransactions = await Transaction.find({
-    owner: _id,
-  })
-    .sort({ createdAt: -1 })
-    .limit(5);
+  const allTransactions = await Transaction
+  .find({owner: _id})
+  .sort({ createdAt: -1 })
 
   res.status(200).send({
     status: "success",
     code: 200,
     message: `Welcome, ${name}!`,
-    data: {
-      token,
-      user: { name, email, balance },
-      lastTransactions,
-    },
+    token,
+    user: { name, email, balance },
+    allTransactions,
   });
 };
 
