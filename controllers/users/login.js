@@ -1,5 +1,4 @@
-const { User } = require("../../models");
-const { Transaction } = require("../../models/transaction");
+const { User, Transaction } = require("../../models");
 
 const { Unauthorized } = require("http-errors");
 const bcrypt = require("bcrypt");

@@ -2,8 +2,7 @@ const queryString = require("query-string");
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
-const { User } = require("../../models");
-const { Transaction } = require("../../models/transaction");
+const { User, Transaction } = require("../../models");
 
 dotenv.config();
 
