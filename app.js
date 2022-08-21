@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 // const swaggerUi = require("swagger-ui-express");
 // const swaggerDocument = require("./swagger.json");
-
+const {User} = require("./models") ;
 
 const usersRouter = require("./routes/api/users");
 const transactionsRouter = require("./routes/api/transactions");
@@ -29,8 +29,11 @@ app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
 });
 
-app.use((err, req, res, next) => {
+app.use(async (err, req, res, next) => {
   const { status = 500, message = "Server error" } = err;
+  if (message === "jwt expired") {
+    await User.findByIdAndUpdate(req.user._id, { token: null });
+  }
   res.status(status).json({ message });
 });
 
