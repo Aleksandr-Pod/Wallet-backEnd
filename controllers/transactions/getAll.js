@@ -10,7 +10,8 @@ const getAll = async (req, res) => {
     status: "success",
     message: "Transactions received",
     code: 200,
-    data: { allTransactions, totalBalance: balance }
+    allTransactions,
+    totalBalance: balance 
   });
 };
 

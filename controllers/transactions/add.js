@@ -30,9 +30,7 @@ const add = async (req, res) => {
     status: "success",
     message: "Transaction added",
     code: 201,
-    data: {
-      result,
-    },
+    result,
   });
 };
 
