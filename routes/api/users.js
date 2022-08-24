@@ -11,7 +11,7 @@ router.post("/register", validation(joiRegSchema), ctrlWrapper(ctrl.register));
 // логін
 router.post("/login", validation(joiLoginSchema), ctrlWrapper(ctrl.login));
 // логаут
-router.get("/logout", auth, ctrlWrapper(ctrl.logout));
+router.post("/logout", auth, ctrlWrapper(ctrl.logout));
 //getCurrentUser
 router.get("/current", auth, ctrlWrapper(ctrl.getCurrent));
 // авторизація через гугл
