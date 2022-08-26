@@ -10,7 +10,10 @@ const remove = async (req, res) => {
     _id: transactionId
   }
 // getting data from deleting transaction
-const {isIncome, amount} = await Transaction.findById(transactionId);
+const resultTransaction = await Transaction.findById(transactionId, {isIncome: 1, amount: 1});
+
+if (!resultTransaction)  throw new NotFound(`findById error`);
+const {isIncome, amount} = resultTransaction;
 
 const result = await Transaction.findOneAndRemove(data);
 if (!result) {
@@ -18,7 +21,6 @@ if (!result) {
     `Transaction id=${transactionId} not found in your collection`
   )
 }
-  
   // calc userBallance
   const newUserBalance = isIncome ? balance - amount : balance + amount;
   // update userBallance

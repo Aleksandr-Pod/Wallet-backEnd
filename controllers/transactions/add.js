@@ -6,8 +6,8 @@ const add = async (req, res) => {
   const { amount, isIncome, date, category } = req.body;
   const month = date.slice(3, 5);
   const year = date.slice(6);
-  const newBalance = isIncome ? balance + Number(amount)
-    : balance - Number(amount);
+  const newBalance = isIncome ? balance + amount
+    : balance - amount;
 
   const getColor = () => {
     const res =  categories.expense.find(el => el.name === category);
