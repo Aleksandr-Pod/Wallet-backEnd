@@ -8,6 +8,7 @@ const add = async (req, res) => {
   const year = date.slice(6);
   const newBalance = isIncome ? balance + Number(amount)
     : balance - Number(amount);
+console.log("newBalance:", newBalance);
 
   const getColor = () => {
     const res =  categories.expense.find(el => el.name === category);
@@ -30,9 +31,7 @@ const add = async (req, res) => {
     status: "success",
     message: "Transaction added",
     code: 201,
-    data: {
-      result,
-    },
+    result,
   });
 };
 

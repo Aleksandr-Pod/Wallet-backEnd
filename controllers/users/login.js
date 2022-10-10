@@ -37,6 +37,7 @@ const login = async (req, res) => {
     token,
     user: { name, email, balance },
     allTransactions,
+    totalBalance: balance
   });
 };
 
