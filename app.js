@@ -31,9 +31,6 @@ app.use((req, res) => {
 
 app.use(async (err, req, res, next) => {
   const { status = 500, message = "Server error" } = err;
-  // if (message === "jwt expired") {
-  //   await User.findByIdAndUpdate(req.user._id, { token: null });
-  // }
   res.status(status).json({ message });
 });
 
