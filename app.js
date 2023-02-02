@@ -7,6 +7,7 @@ const cors = require("cors");
 const usersRouter = require("./routes/api/users");
 const transactionsRouter = require("./routes/api/transactions");
 const statisticsRouter = require("./routes/api/statistics");
+const currencyRouter = require("./routes/api/currency");
 const app = express();
 
 app.use(cors());
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use("/api/users", usersRouter);
 app.use("/api/transactions", transactionsRouter);
 app.use("/api/statistics", statisticsRouter);
+app.use("/api/currency", currencyRouter);
 
 // app.use("/link", (req, res) => {
 //   res.sendFile(path.join(__dirname, "./public/link.html"));

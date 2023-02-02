@@ -58,14 +58,10 @@ exports.googleRedirect = async (req, res) => {
 
   const name = userData.data.given_name;
   const email = userData.data.email;
-  let user = null;
+  let user;
   user = await User.findOne({ email });
-  if (!user) {
-    user = await User.create({
-      email,
-      name,
-    });
-  }
+  if (!user) user = await User.create({ email, name });
+  
   // const { _id, balance } = user;
   // const payload = {
   //   id: user._id,
