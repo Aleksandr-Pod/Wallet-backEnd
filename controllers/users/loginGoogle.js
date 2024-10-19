@@ -13,6 +13,7 @@ const {
   SECRET_KEY,
   FRONTEND_URL,
 } = process.env;
+if (!GOOGLE_CLIENT_ID) console.log("No GOOGLE CLIENT ID !!!");
 
 exports.googleAuth = async (req, res) => {
   const stringParams = queryString.stringify({
