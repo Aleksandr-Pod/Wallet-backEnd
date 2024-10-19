@@ -4,11 +4,9 @@ const bcrypt = require("bcrypt");
 
 const register = async (req, res) => {
   const { email, password, name } = req.body;
+  
   const user = await User.findOne({ email });
-
-  if (user) {
-    throw new Conflict(`Email ${email} in use yet`);
-  }
+  if (user) throw new Conflict(`Email ${email} in use yet`);
 
   const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 

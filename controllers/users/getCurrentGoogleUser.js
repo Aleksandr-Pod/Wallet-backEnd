@@ -9,14 +9,10 @@ const getCurrentGoogleUser = async (req, res) => {
   const { email } = req.body;
   const user = await User.findOne({ email });
   const { _id, name, balance } = user;
-  const payload = {
-    id: user._id,
-  };
-  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
+
+  const token = jwt.sign({id:_id}, SECRET_KEY, { expiresIn: "1h" });
   await User.findByIdAndUpdate(_id, { token });
-  const lastTransactions = await Transaction.find({
-    owner: _id,
-  })
+  const lastTransactions = await Transaction.find({owner: _id})
     .sort({ createdAt: -1 })
     .limit(5);
 

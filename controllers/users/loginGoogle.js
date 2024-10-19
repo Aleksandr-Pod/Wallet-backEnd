@@ -2,7 +2,7 @@ const queryString = require("query-string");
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
-const { User, Transaction } = require("../../models");
+const { User } = require("../../models");
 
 dotenv.config();
 
@@ -48,43 +48,20 @@ exports.googleRedirect = async (req, res) => {
     },
   });
 
-  const userData = await axios({
+  const {data} = await axios({
     url: "https://www.googleapis.com/oauth2/v2/userinfo",
     method: "get",
-    headers: {
-      Authorization: `Bearer ${tokenData.data.access_token}`,
-    },
+    headers: {Authorization: `Bearer ${tokenData.data.access_token}`}
   });
-
-  const name = userData.data.given_name;
-  const email = userData.data.email;
+  const { given_name: name, email } = data
+  
   let user;
   user = await User.findOne({ email });
   if (!user) user = await User.create({ email, name });
-  
-  // const { _id, balance } = user;
-  // const payload = {
-  //   id: user._id,
-  // };
-  // const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
-  // await User.findByIdAndUpdate(_id, { token });
+  const { _id } = user;
+  const payload = {id: user._id};
+  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
+  await User.findByIdAndUpdate(_id, { token });
 
-  res.redirect(`${FRONTEND_URL}/google-user?email=${email}`);
-
-  // const lastTransactions = await Transaction.find({
-  //   owner: _id,
-  // })
-  //   .sort({ createdAt: -1 })
-  //   .limit(5);
-
-  // res.status(200).send({
-  //   status: "success",
-  //   code: 200,
-  //   message: `Welcome, ${name}!`,
-  //   data: {
-  //     token,
-  //     user: { name, email, balance },
-  //     lastTransactions,
-  //   },
-  // });
+  res.redirect(`${FRONTEND_URL}/home/google-user?email=${email}`);
 };
